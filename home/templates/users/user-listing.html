@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Listing</title>
+</head>
+<body>
+    <h1>User Listing</h1>
+    <ul style="list-style-type: none;">
+        <!-- insert user list here -->
+    </ul>
+    <script>
+        // user list array
+        const users = ['John Doe', 'Jane Smith', 'Emily Johnson', 'Michael Brown', 'Sarah Davis'];
+        const userList = document.querySelector('ul');
+        userList.innerHTML = '';
+        users.forEach(user => {
+            const listItem = document.createElement('li');
+            listItem.textContent = user;
+            userList.appendChild(listItem);
+        });
+
+    </script>
+</body>
+</html>
