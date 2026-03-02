@@ -7,9 +7,9 @@
 </head>
 <body>
     <h1>User Listing</h1>
-    <ul style="list-style-type: none;">
+    <!-- <ul style="list-style-type: none;"> -->
         <!-- insert user list here -->
-    </ul>
+    <!-- </ul>
     <script>
         // user list array
         const users = ['John Doe', 'Jane Smith', 'Emily Johnson', 'Michael Brown', 'Sarah Davis'];
@@ -21,6 +21,28 @@
             userList.appendChild(listItem);
         });
 
-    </script>
+    </script> -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>can Vote</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.age }}</td>
+            <td>{% if user.age >= 18 %}Yes{% else %}No{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 </body>
 </html>

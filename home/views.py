@@ -18,4 +18,11 @@ def tutorial(request):
     return render(request, 'index.html')
 # templeate view (specific folder vise )
 def users(request):
-    return render(request, 'users/user-listing.html')
+    user_list = [
+        {'name': 'Alice', 'email': 'alice@example.com','age': 15},
+        {'name': 'Bob', 'email': 'bob@example.com','age': 25},
+        {'name': 'Charlie', 'email': 'charlie@example.com','age': 35},
+        {'name': 'David', 'email': 'david@example.com','age': 13},
+        {'name': 'Eve', 'email': 'eve@example.com','age': 32}
+    ]
+    return render(request, 'users/user-listing.html', context={'users': user_list})
