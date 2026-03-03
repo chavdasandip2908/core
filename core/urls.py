@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from home.views import *
+from fuddy.views import *
 
 
 urlpatterns = [
@@ -24,5 +25,8 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('tutorial/', tutorial, name='tutorial'),
     path('users/', users, name='users'),
+    path('update-product/<int:product_id>/', update_product, name='update_product'),
+    path('delete-product/<int:product_id>/', delete_product, name='delete_product'),
+    path('products/', products, name='products'),
     path('admin/', admin.site.urls),
 ]
