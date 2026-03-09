@@ -12,7 +12,7 @@
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
             <h1>Registered Users</h1>
-            <a href="/logout/" style="color: #f44336; text-decoration: none; font-weight: bold;">Logout</a>
+            <a href="{% url 'logout' %}" style="color: #f44336; text-decoration: none; font-weight: bold;">Logout</a>
         </div>
 
         <div style="background: #fff; padding: 1.5rem; border-radius: 8px; border: 1px solid #ddd;">
@@ -23,6 +23,7 @@
                         <th style="padding: 1rem 0.5rem; color: #666;">Name</th>
                         <th style="padding: 1rem 0.5rem; color: #666;">Email</th>
                         <th style="padding: 1rem 0.5rem; color: #666;">Joined On</th>
+                        <th style="padding: 1rem 0.5rem; color: #666;">Last Login</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,10 +31,15 @@
                     {% for user in users %}
                     <tr style="border-bottom: 1px solid #f9f9f9;">
                         <td style="padding: 1rem 0.5rem;">{{ user.id }}</td>
-                        <td style="padding: 1rem 0.5rem; font-weight: 500;">{{ user.name }}</td>
+                        <td style="padding: 1rem 0.5rem; font-weight: 500;">
+                            {{ user.get_full_name|default:user.username}}
+                        </td>
                         <td style="padding: 1rem 0.5rem; color: #555;">{{ user.email }}</td>
-                        <td style="padding: 1rem 0.5rem; color: #888; font-size: 0.9rem;">{{ user.created_at|date:"M d,
-                            Y" }}
+                        <td style="padding: 1rem 0.5rem; color: #888; font-size: 0.9rem;">
+                            {{ user.date_joined|date:"M d,Y" }}
+                        </td>
+                        <td style="padding: 1rem 0.5rem; color: #888; font-size: 0.9rem;">
+                            {{ user.last_login|date:"M d,Y H:i:s"|default:"Never" }}
                         </td>
                     </tr>
                     {% endfor %}
@@ -47,7 +53,7 @@
         </div>
 
         <div style="margin-top: 1.5rem;">
-            <a href="/" style="color: #2196F3; text-decoration: none;">&larr; Back to Home</a>
+            <a href="{% url 'home' %}" style="color: #2196F3; text-decoration: none;">&larr; Back to Home</a>
         </div>
     </div>
 </body>

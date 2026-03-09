@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; ">
+    <div style="max-width: 800px; margin: 0 auto; padding: 2rem 1rem;">
+
+        <h1 style="margin-bottom: 1.5rem;">Sign In</h1>
+
+        {% if success_message %}
+        <div
+            style="background-color: #e8f5e9; color: #2e7d32; padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem; border: 1px solid #c8e6c9;">
+            {{ success_message }}
+        </div>
+        {% endif %}
+        <form method="post"
+            style="background: #fff; padding: 1.5rem; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 2rem;">
+            {% csrf_token %}
+
+            <div style="margin-bottom: 1rem;">
+                <label for="email" style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email"
+                    style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem;">
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                    <label for="password" style="font-weight: bold;">Password</label>
+                    <a href="{% url 'forget_password' %}"
+                        style="font-size: 0.85rem; color: #2196F3; text-decoration: none;">Forgot password?</a>
+                </div>
+                <input type="password" id="password" name="password" required placeholder="Enter your password"
+                    style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem;">
+            </div>
+
+            <button type="submit"
+                style="background-color: #4CAF50; color: white; border: none; padding: 0.6rem 1.5rem; font-size: 1rem; border-radius: 4px; cursor: pointer; margin-bottom: 1rem;">
+                Login
+            </button>
+
+            {% load socialaccount %}
+            {% get_providers as socialaccount_providers %}
+            {% if socialaccount_providers %}
+            <div style="margin-top: 1rem;">
+                <p style="text-align: center; color: #777; margin-bottom: 1rem;">OR</p>
+                {% for provider in socialaccount_providers %}
+                <a href="{% provider_login_url provider.id %}"
+                    style="display: block; text-align: center; background-color: #4285F4; color: white; border: none; padding: 0.6rem 1.5rem; font-size: 1rem; border-radius: 4px; cursor: pointer; text-decoration: none; font-weight: bold; margin-bottom: 0.5rem;">
+                    Continue with {{ provider.name }}
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <p style="margin-top: 1.5rem; color: #555;">
+                Don't have an account? <a href="{% url 'register' %}"
+                    style="color: #2196F3; text-decoration: none;">Register
+                    here</a>
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>

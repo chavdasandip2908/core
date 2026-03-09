@@ -38,8 +38,24 @@
                 Register
             </button>
 
-            <p style="margin: 0; color: #555;">
-                Already have an account? <a href="/login/" style="color: #2196F3; text-decoration: none;">Login here</a>
+            {% load socialaccount %}
+            {% get_providers as socialaccount_providers %}
+            {% if socialaccount_providers %}
+            <div style="margin-top: 1rem;">
+                <p style="text-align: center; color: #777; margin-bottom: 1rem;">OR</p>
+                {% for provider in socialaccount_providers %}
+                <a href="{% provider_login_url provider.id %}"
+                    style="display: block; text-align: center; background-color: #4285F4; color: white; border: none; padding: 0.6rem 1.5rem; font-size: 1rem; border-radius: 4px; cursor: pointer; text-decoration: none; font-weight: bold; margin-bottom: 0.5rem;">
+                    Sign up with {{ provider.name }}
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <p style="margin-top: 1.5rem; color: #555;">
+                Already have an account? <a href="{% url 'login' %}"
+                    style="color: #2196F3; text-decoration: none;">Login
+                    here</a>
             </p>
         </form>
     </div>
